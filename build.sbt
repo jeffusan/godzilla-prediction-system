@@ -26,7 +26,13 @@ libraryDependencies ++= {
     "org.webjars" % "react" % "0.13.1",
     "org.webjars" % "jsx-requirejs-plugin" % "0.6.0",
     "org.webjars" % "jquery" % "2.1.4",
-    "org.webjars" % "react-router" % "0.13.2"
+    "org.webjars" % "react-router" % "0.13.2",
+    // test
+    "io.spray" %% "spray-testkit" % sprayVersion % "test",
+    "org.hamcrest" % "hamcrest-all" % "1.3" % "test",
+    "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test",
+    "org.scalatest" %% "scalatest" % "2.2.5" % "test",
+    "org.specs2" %% "specs2" % "2.3.11"
   )
 }
 

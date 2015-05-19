@@ -50,5 +50,5 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
     }
   }
 
-  val routes = publicAssets ~ index ~ api ~ webjars ~ heat ~ locations ~ getFromResourceDirectory("assets")
+  val routes = publicAssets ~ index ~ api ~ webjars ~ getFromResourceDirectory("assets")
 }
