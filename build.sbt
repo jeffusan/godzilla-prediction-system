@@ -25,6 +25,8 @@ libraryDependencies ++= {
 
 Twirl.settings
 
+Revolver.settings
+
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
 fork in run := true

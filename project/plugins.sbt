@@ -3,3 +3,5 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.3.7")
 
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.3")
+
+addSbtPlugin("io.spray" % "sbt-revolver" % "0.7.2")
