@@ -28,7 +28,7 @@ trait Api extends RouteConcatenation {
 
   this: BootSystem =>
 
-  val routes = new GodzillaApi().route
+  val routes = new GodzillaApi().routes
 
   val routeService = actorSystem.actorOf(Props(new ApplicationApiActor(routes)))
 }

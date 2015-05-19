@@ -19,7 +19,14 @@ libraryDependencies ++= {
     "io.spray"           %%  "spray-json"             % "1.3.1",
     "io.spray"           %%  "spray-httpx"            % sprayVersion,
     "org.apache.spark"   %%  "spark-core"             % sparkVersion,
-    "org.apache.spark"   %%  "spark-sql"              % sparkVersion
+    "org.apache.spark"   %%  "spark-sql"              % sparkVersion,
+    // WebJars (i.e. client-side) dependencies
+    "org.webjars" % "requirejs" % "2.1.17",
+    "org.webjars" % "requirejs-text" % "2.0.10-3",
+    "org.webjars" % "react" % "0.13.1",
+    "org.webjars" % "jsx-requirejs-plugin" % "0.6.0",
+    "org.webjars" % "jquery" % "2.1.4",
+    "org.webjars" % "react-router" % "0.13.2"
   )
 }
 
