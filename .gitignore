@@ -19,3 +19,4 @@ server.pid
 .cache
 .ensime
 .ensime_cache/
+.idea/
