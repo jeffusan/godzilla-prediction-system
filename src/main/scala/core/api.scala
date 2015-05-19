@@ -37,7 +37,7 @@ trait Api extends RouteConcatenation {
   * DefaultTimeout is used to configure the application timeout exception
   */
 trait DefaultTimeout {
-  implicit val timeout = new Timeout(2, TimeUnit.SECONDS)
+  implicit val timeout = new Timeout(30, TimeUnit.SECONDS)
 }
 
 /**

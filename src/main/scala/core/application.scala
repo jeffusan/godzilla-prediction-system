@@ -1,6 +1,7 @@
 package core
 
-import akka.actor.Actor
+import akka.actor.{Actor, Props}
+import service.GodzillaActor
 
 case class Startup()
 case class Shutdown()
@@ -13,6 +14,7 @@ class ApplicationActor extends Actor {
 
   def receive: Receive = {
     case Startup() => {
+      context.actorOf(Props[GodzillaActor], "godzilla")
       sender ! true
     }
     case Shutdown() => {

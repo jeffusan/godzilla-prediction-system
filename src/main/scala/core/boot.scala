@@ -15,7 +15,7 @@ import scala.concurrent.Await
   */
 object Boot {
 
-  implicit val system = ActorSystem("godzilla-prediction-system")
+  implicit val system = ActorSystem("gds")
 
   def main(args: Array[String]) {
     class ApplicationServer(val actorSystem: ActorSystem) extends BootSystem with Api with ServerIO
@@ -30,6 +30,8 @@ trait ServerIO {
   this: Api with BootSystem =>
 
   val config = ConfigFactory.load()
+
+  SparkConfig.init()
 
   IO(Http) ! Http.Bind(routeService, config.getString("application.server.host"), config.getInt("application.server.port"))
 }
