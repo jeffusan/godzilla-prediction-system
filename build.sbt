@@ -29,9 +29,6 @@ libraryDependencies ++= {
     "org.webjars" % "react-router" % "0.13.2",
     // test
     "io.spray" %% "spray-testkit" % sprayVersion % "test",
-    "org.hamcrest" % "hamcrest-all" % "1.3" % "test",
-    "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test",
-    "org.scalatest" %% "scalatest" % "2.2.5" % "test",
     "org.specs2" %% "specs2" % "2.3.11"
   )
 }
