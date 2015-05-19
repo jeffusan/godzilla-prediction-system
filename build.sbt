@@ -22,3 +22,6 @@ lazy val gds = crossProject.in(file(".")).
 
 lazy val gdsJVM = gds.jvm
 lazy val gdsJS = gds.js
+
+
+fork in run := true

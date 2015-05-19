@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Godzilla Prediction System</title>
+<!-- 2015-05-19 Tue 15:00 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Jeff Hemminger" />
+</head>
+<body>
+<div id="content">
+
+<h2 id="sec-1">The Godzilla Prediction System</h2>
+
+<p>
+This application demonstrates how to integrate Spray, Spark, and ScalaJS together in a multi-project build.
+The premise is that when provided with a corpus of data, Apache Spark is a good tool to analyze it with.
+Akka is a good framework to build applications with, and Spray does a nice job of adding Http support to Akka.
+Scala is a nice language to work with, and happens to also work well in the client compiling to JavaScript.
+</p>
+
+<p>
+Therefore, the powers combined are pretty nice!
+</p>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">The build script</h2>
+
+<p>
+This demonstration uses SBT and specifically the build.sbt style script.
+</p>
+
+<p>
+It's import to note that this is a multi-project build; one project is defined for server-side Scala,
+and the other project compiles to JavaScript for the client.
+</p>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Akka and Spray</h2>
+
+<p>
+The middleware layer, Akka and Spray, stands largely on the shoulders of giants,
+namely the elegant and clean <a href="http://github.com/darek/spray-slick-seed">Spray Slick Seed</a> designed by <a href="http://github.com/darek">Darek Zon</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Spark</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Configuration is provided in the application.conf file. When the Akka system starts, Spark is booted
+as well.
+</p>
+
+<p>
+Data is provided in the src/main/resources/input<sub>data</sub>.json file.
+</p>
+</div>
+
+</body>
+</html>
