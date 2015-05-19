@@ -10,25 +10,19 @@
 
 ** The Godzilla Prediction System
 
-This application demonstrates how to integrate Spray, Spark, and ScalaJS together in a multi-project build.
+This application demonstrates how to integrate Spray and Spark together.
 The premise is that when provided with a corpus of data, Apache Spark is a good tool to analyze it with.
 Akka is a good framework to build applications with, and Spray does a nice job of adding Http support to Akka.
-Scala is a nice language to work with, and happens to also work well in the client compiling to JavaScript.
 
 Therefore, the powers combined are pretty nice!
-
 
 ** The build script
 
 This demonstration uses SBT and specifically the build.sbt style script.
 
-It's import to note that this is a multi-project build; one project is defined for server-side Scala,
-and the other project compiles to JavaScript for the client.
-
 ** Akka and Spray
 
-The middleware layer, Akka and Spray, stands largely on the shoulders of giants,
-namely the elegant and clean [[http://github.com/darek/spray-slick-seed][Spray Slick Seed]] designed by [[http://github.com/darek][Darek Zon]].
+The middleware layer
 
 ** Spark
 
