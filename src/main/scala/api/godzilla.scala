@@ -8,6 +8,7 @@ import spray.httpx.TwirlSupport
 import spray.httpx.encoding.Gzip
 import service.{MapFormats, HeatMapData, LocationData, Heat, Location}
 import akka.pattern.ask
+import scala.util.Try
 
 /**
   * Sample API for the Godzilla Prediction System
@@ -37,7 +38,7 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
   val heat = path("heat") {
     get {
       complete {
-        (godzillaActor ? HeatMapData()).mapTo[List[Heat]]
+        (godzillaActor ? HeatMapData()).mapTo[Try[List[Heat]]]
       }
     }
   }
@@ -45,7 +46,7 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
   val locations = path("locations") {
     get {
       complete {
-        (godzillaActor ? LocationData()).mapTo[List[Location]]
+        (godzillaActor ? LocationData()).mapTo[Try[List[Location]]]
       }
     }
   }

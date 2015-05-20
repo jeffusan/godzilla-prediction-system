@@ -5,6 +5,7 @@ import api.Marshalling
 import spray.http.StatusCodes
 import spray.json.ProductFormats
 import core.SparkConfig._
+import scala.util.Try
 
 case class HeatMapData()
 case class LocationData()
@@ -27,21 +28,24 @@ class GodzillaActor extends Actor with SearchActions with ActorLogging {
 
 trait SearchActions {
 
-  def getHeatMapData(): List[Heat] = {
+  def getHeatMapData(): Try[List[Heat]] = {
 
     val query = """
     SELECT * FROM heat
     """
-    val dataFrame = sqlContext.sql(query)
+    Try {
+      val dataFrame = sqlContext.sql(query)
 
-    dataFrame.map(row => new Heat(
-      row.getDouble(0),
-      row.getDouble(1)
-    )).collect().toList
+      dataFrame.map(row => new Heat(
+        row.getDouble(0),
+        row.getDouble(1)
+      )).collect().toList
+
+    }
 
   }
 
-  def getLocationData(): List[Location] = {
+  def getLocationData(): Try[List[Location]] = {
     val query = """
     SELECT
       T1.depth, temperature, T1.castNumber, T1.cruiseId, T1.latitude, T1.longitude
@@ -54,16 +58,18 @@ trait SearchActions {
      ON T1.depth = T2.depth
      WHERE T1.temperature > T2.average + 12
     """
-    val dataFrame = sqlContext.sql(query)
+    Try {
+      val dataFrame = sqlContext.sql(query)
 
-    dataFrame.map(row => new Location(
-          row.getDouble(0),
-          row.getDouble(1),
-          row.getLong(2),
-          row.getString(3),
-          row.getDouble(4),
-          row.getDouble(5)
-    )).collect().toList
+      dataFrame.map(row => new Location(
+        row.getDouble(0),
+        row.getDouble(1),
+        row.getLong(2),
+        row.getString(3),
+        row.getDouble(4),
+        row.getDouble(5)
+      )).collect().toList
+    }
   }
 }
 
