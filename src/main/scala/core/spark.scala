@@ -17,6 +17,8 @@ object SparkConfig {
 
   def init() = {
     sqlContext.jsonFile("src/main/resources/data.json").registerTempTable("godzilla")
+    val heatFrame = sqlContext.sql("SELECT latitude, longitude FROM godzilla")
+    heatFrame.registerTempTable("heat")
   }
 
 }

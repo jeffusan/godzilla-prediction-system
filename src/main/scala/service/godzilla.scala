@@ -30,8 +30,7 @@ trait SearchActions {
   def getHeatMapData(): List[Heat] = {
 
     val query = """
-    SELECT
-    latitude, longitude from godzilla
+    SELECT * FROM heat
     """
     val dataFrame = sqlContext.sql(query)
 
@@ -45,7 +44,7 @@ trait SearchActions {
   def getLocationData(): List[Location] = {
     val query = """
     SELECT
-      T1.depth, T1.temperature, T1.castNumber, T1.cruiseId, T1.latitude, T1.longitude
+      T1.depth, temperature, T1.castNumber, T1.cruiseId, T1.latitude, T1.longitude
     FROM (
      SELECT depth, temperature, castNumber, cruiseId,
        latitude, longitude from godzilla) AS T1
