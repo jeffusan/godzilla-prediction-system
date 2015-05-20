@@ -6,6 +6,7 @@ import spray.http.StatusCodes
 import spray.json.ProductFormats
 import core.SparkConfig._
 import scala.util.Try
+import scala.concurrent._
 
 case class HeatMapData()
 case class LocationData()
