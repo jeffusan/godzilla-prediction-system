@@ -9,9 +9,6 @@ import spray.httpx.encoding.Gzip
 import service.{MapFormats, HeatMapData, LocationData, Heat, Location}
 import akka.pattern.ask
 import scala.util.{Try, Success, Failure}
-import scala.concurrent._
-import akka.pattern.ask
-import spray.json._
 
 /**
   * Sample API for the Godzilla Prediction System
@@ -33,12 +30,10 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
 
   // home page, retrieves compiled twirl template
   val index = path("") {
-
-    onComplete(ask(godzillaActor, HeatMapData()).mapTo[List[Heat]]) {
-        case Success(value) =>
-          _.complete(html.index())
-        case Failure(e) =>
-          complete(html.index())
+    get {
+      complete {
+        html.index()
+      }
     }
   }
 
