@@ -57,7 +57,7 @@ trait SearchActions {
        SELECT avg(temperature) as average, depth from godzilla group by depth
      )  AS T2
      ON T1.depth = T2.depth
-     WHERE T1.temperature > T2.average + 12
+     WHERE T1.temperature > T2.average + 16
     """
     Try {
       val dataFrame = sqlContext.sql(query)
