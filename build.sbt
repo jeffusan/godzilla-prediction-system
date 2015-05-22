@@ -27,6 +27,8 @@ libraryDependencies ++= {
     "org.webjars"        %   "jsx-requirejs-plugin"   % "0.6.0",
     "org.webjars"        %   "jquery"                 % "2.1.4",
     "org.webjars"        %   "react-router"           % "0.13.2",
+    "org.webjars"        %   "bootstrap"              % "3.3.4",
+    "org.webjars"        %   "react-bootstrap"        % "0.19.1",
     // test
     "io.spray"           %%  "spray-testkit"          % sprayVersion % "test",
     "org.specs2"         %%  "specs2"                 % "2.3.11"

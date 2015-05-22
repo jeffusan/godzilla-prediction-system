@@ -8,8 +8,8 @@ import core.SparkConfig._
 import scala.util.Try
 import scala.concurrent._
 
-case class HeatMapData()
-case class LocationData()
+case class HeatMapData(samplRate: Double)
+case class LocationData(deviation: Int)
 case class Heat(latitude: Double, longitude: Double)
 case class Location(
     depth: Double, temperature: Double, cast: Long, cruise: String, latitude: Double, longitude: Double)
@@ -18,26 +18,26 @@ class GodzillaActor extends Actor with SearchActions with ActorLogging {
 
   def receive: Receive = {
 
-    case HeatMapData() =>
+    case HeatMapData(sampleRate) =>
       log.info("Received request for heat")
-      sender ! getHeatMapData()
+      sender ! getHeatMapData(sampleRate)
 
-    case LocationData() =>
-      sender ! getLocationData()
+    case LocationData(deviation) =>
+      log.info("Received request for locations")
+      sender ! getLocationData(deviation)
   }
 }
 
 trait SearchActions {
 
-  def getHeatMapData(): Try[List[Heat]] = {
+  val dividend = 1000.toDouble
 
-    val query = """
-    SELECT * FROM heat
-    """
+  def getHeatMapData(sampleRate: Double): Try[List[Heat]] = {
+
     Try {
-      val dataFrame = sqlContext.sql(query)
+      val dataFrame = sqlContext.sql("SELECT * FROM heat")
 
-      dataFrame.map(row => new Heat(
+      dataFrame.sample(false, sampleRate / dividend ).map(row => new Heat(
         row.getDouble(0),
         row.getDouble(1)
       )).collect().toList
@@ -46,8 +46,8 @@ trait SearchActions {
 
   }
 
-  def getLocationData(): Try[List[Location]] = {
-    val query = """
+  def getLocationData(deviation: Int): Try[List[Location]] = {
+    val query = s"""
     SELECT
       T1.depth, temperature, T1.castNumber, T1.cruiseId, T1.latitude, T1.longitude
     FROM (
@@ -57,7 +57,7 @@ trait SearchActions {
        SELECT avg(temperature) as average, depth from godzilla group by depth
      )  AS T2
      ON T1.depth = T2.depth
-     WHERE T1.temperature > T2.average + 16
+     WHERE T1.temperature > T2.average + $deviation
     """
     Try {
       val dataFrame = sqlContext.sql(query)

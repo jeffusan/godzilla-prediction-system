@@ -38,18 +38,18 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
   }
 
   // does not block
-  val heat = path("heat") {
+  val heat = path("heat" / DoubleNumber) { sampleRate =>
     get {
       complete {
-        (godzillaActor ? HeatMapData()).mapTo[Try[List[Heat]]]
+        (godzillaActor ? HeatMapData(sampleRate)).mapTo[Try[List[Heat]]]
       }
     }
   }
 
-  val locations = path("locations") {
+  val locations = path("locations" / IntNumber) { deviation =>
     get {
       complete {
-        (godzillaActor ? LocationData()).mapTo[Try[List[Location]]]
+        (godzillaActor ? LocationData(deviation)).mapTo[Try[List[Location]]]
       }
     }
   }

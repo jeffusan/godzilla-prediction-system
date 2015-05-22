@@ -14,7 +14,9 @@
       'react-router' : ['/webjars/react-router/0.13.2/ReactRouter'],
       'react-router-shim': 'react-router-shim',
       'jsRoutes': ['/jsroutes'],
-      'text': ['/webjars/requirejs-text/2.0.10-3/text']
+      'text': ['/webjars/requirejs-text/2.0.10-3/text'],
+      'bootstrap': ['/webjars/bootstrap/3.3.4/js/bootstrap'],
+      'react-bootstrap': ['/webjars/react-bootstrap/0.19.1/react-bootstrap']
     },
     jsx: {
       fileExtension: '.jsx'
@@ -32,6 +34,11 @@
       'react-router': {
         deps:    ['react'],
         exports: 'Router'
+      },
+      'bootstrap': ['jquery'],
+      'react-bootstrap': {
+        deps: ['react', 'bootstrap'],
+        exports: 'ReactBootstrap'
       }
     }
   });
