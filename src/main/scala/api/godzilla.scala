@@ -6,7 +6,7 @@ import spray.routing.Directives
 import spray.http.MediaTypes._
 import spray.httpx.TwirlSupport
 import spray.httpx.encoding.Gzip
-import service.{MapFormats, HeatMapData, LocationData, Heat, Location}
+import service.{MapFormats, LocationData, Location}
 import akka.pattern.ask
 import scala.util.{Try, Success, Failure}
 
@@ -38,14 +38,6 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
   }
 
   // does not block
-  val heat = path("heat" / DoubleNumber) { sampleRate =>
-    get {
-      complete {
-        (godzillaActor ? HeatMapData(sampleRate)).mapTo[Try[List[Heat]]]
-      }
-    }
-  }
-
   val locations = path("locations" / IntNumber) { deviation =>
     get {
       complete {
@@ -61,5 +53,5 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
     }
   }
 
-  val routes = publicAssets ~ index ~ heat ~ locations ~ webjars ~ getFromResourceDirectory("assets")
+  val routes = publicAssets ~ index ~ locations ~ webjars ~ getFromResourceDirectory("assets")
 }

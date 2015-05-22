@@ -9,46 +9,21 @@ define(function(require) {
 
   var GodzillaToolbar = React.createClass({
 
-    heatLowClicked: function() {
-      this.props.heat(5);
-    },
-    heatMediumClicked: function() {
-      this.props.heat(30);
-    },
-    heatHighClicked: function() {
-      this.props.heat(100);
-    },
     filterLowClick: function() {
-      this.props.filter(18);
+      this.props.filter(13);
     },
     filterMediumClick: function() {
       this.props.filter(16);
     },
     filterHighClick: function() {
-      this.props.filter(13);
+      this.props.filter(18);
     },
 
     render: function() {
       return (
         <div id="panel">
           <ButtonToolbar>
-            <Button bsSize='small' disabled>Heat</Button>
-            <Button
-              bsStyle='info'
-              bsSize='small'
-              onClick={this.heatLowClicked}>Low</Button>
-
-            <Button
-              bsStyle='warning'
-              bsSize='small'
-              onClick={this.heatMediumClicked}>Med</Button>
-
-            <Button
-              bsStyle='danger'
-              bsSize='small'
-              onClick={this.heatHighClicked}>High</Button>
-            <Button bsSize='small' disabled>Refine</Button>
-
+            <Button bsSize='small' disabled>Refinement</Button>
             <Button
               bsStyle='info'
               bsSize='small'

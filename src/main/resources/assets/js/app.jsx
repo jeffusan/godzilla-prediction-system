@@ -8,45 +8,22 @@ define(function(require) {
 
   var App = React.createClass({
 
-    getInitialState: function() {
+    getDefaultProps: function() {
       return {
-        heatPlots: [],
-        sampleRate: 30,
-        locations: [],
         deviation: 16
       };
     },
 
-    getHeat: function(sampleRate) {
-      if (typeof sampleRate === "undefined") {
-        sampleRate = this.state.sampleRate
-      }
-      $.ajax({
-        'type': 'GET',
-        'url': '/heat/' + sampleRate,
-        'contentType': 'application/json',
-        'async': 'false',
-        'success' : function(data) {
-          if(this.isMounted()) {
-            this.setState({
-              heatPlots: data
-            });
-          }
-        }.bind(this),
-        'error': function(data) {
-          console.log("error");
-        }.bind(this)
-      });
+    getInitialState: function() {
+      return {
+        locations: []
+      };
     },
 
-    getLocations: function(deviation) {
-      if (typeof deviation === "undefined") {
-        deviation = this.state.deviation
-      }
-
+    getLocations: function() {
       $.ajax({
         'type': 'GET',
-        'url': '/locations/' + deviation,
+        'url': '/locations/' + this.props.deviation,
         'contentType': 'application/json',
         'async': 'false',
         'success' : function(data) {
@@ -63,30 +40,21 @@ define(function(require) {
     },
 
     componentDidMount: function() {
-      this.getHeat();
       this.getLocations();
     },
 
-    heat: function(sampleRate) {
-      this.setState({sampleRate: sampleRate});
-      this.getHeat(sampleRate);
-    },
-
     filter: function(deviation) {
-      this.setState({deviation: deviation});
-      this.getLocations(deviation);
+      this.props.deviation = deviation;
+      this.getLocations();
     },
 
     render: function () {
       return (
         <div>
-          <Toolbar
-            heat={this.heat}
-            filter={this.filter}/>
+          <Toolbar filter={this.filter}/>
           <Map
-            heatPlots={this.state.heatPlots}
-            locations={this.state.locations}
-            {...this.props}/>
+           locations={this.state.locations}
+           deviation={this.props.deviation}/>
         </div>
       );
     }
@@ -94,9 +62,7 @@ define(function(require) {
   });
 
   App.init = function () {
-
       React.render(<App/>, document.getElementById('godzilla'));
-
   };
 
   return App;
