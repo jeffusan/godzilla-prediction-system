@@ -18,7 +18,9 @@ object SparkConfig {
 
   def init() = {
     // this loads the json data and creates a temporary table used for SQL later
-    sqlContext.jsonFile("src/main/resources/data.json").registerTempTable("godzilla")
+    val dataFrame = sqlContext.jsonFile("src/main/resources/data.json")
+    dataFrame.registerTempTable("godzilla")
+    dataFrame.cache()
   }
 
 }
