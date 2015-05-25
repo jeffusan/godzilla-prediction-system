@@ -4,7 +4,7 @@ define(function(require) {
 
   var React = require('react');
 
-  var Map = React.createClass({
+  return React.createClass({
 
     getDefaultProps: function () {
       return {
@@ -64,8 +64,6 @@ define(function(require) {
     }
 
   });
-
-  return Map;
 
 });
 

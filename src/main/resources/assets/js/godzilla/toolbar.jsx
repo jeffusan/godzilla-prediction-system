@@ -7,7 +7,7 @@ define(function(require) {
   var ButtonToolbar = ReactBootstrap.ButtonToolbar;
   var Button = ReactBootstrap.Button;
 
-  var GodzillaToolbar = React.createClass({
+  return React.createClass({
 
     filterLowClick: function() {
       this.props.filter(13);
@@ -44,5 +44,4 @@ define(function(require) {
     }
   });
 
-  return GodzillaToolbar;
 });

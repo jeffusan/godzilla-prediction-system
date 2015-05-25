@@ -7,8 +7,8 @@ import spray.httpx.marshalling.{ MetaMarshallers, CollectingMarshallingContext, 
 import spray.json.DefaultJsonProtocol
 
 /**
-  * Case class that represents Error inside application
-  * @param code Status code that will be returned in the response
+  * Case class that represents an Error inside the application
+  * @param code Status code returned in the response
   * @param entity Response entity
   */
 case class ErrorResponseException(code: StatusCode, entity: HttpEntity) extends Throwable

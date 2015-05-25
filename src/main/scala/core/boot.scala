@@ -5,7 +5,7 @@ import akka.actor.{ Props, ActorSystem }
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
-import com.typesafe.config.{ ConfigFactory, Config }
+import com.typesafe.config.ConfigFactory
 import spray.can.Http
 import scala.concurrent.Await
 
@@ -25,12 +25,16 @@ object Boot {
   }
 }
 
+/**
+ *
+ */
 trait ServerIO {
 
   this: Api with BootSystem =>
 
   val config = ConfigFactory.load()
 
+  // this starts spark
   SparkConfig.init()
 
   IO(Http) ! Http.Bind(routeService, config.getString("application.server.host"), config.getInt("application.server.port"))

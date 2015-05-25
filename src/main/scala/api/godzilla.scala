@@ -3,12 +3,11 @@ package api
 import core.DefaultTimeout
 import akka.actor.ActorSystem
 import spray.routing.Directives
-import spray.http.MediaTypes._
 import spray.httpx.TwirlSupport
 import spray.httpx.encoding.Gzip
 import service.{MapFormats, LocationData, Location}
 import akka.pattern.ask
-import scala.util.{Try, Success, Failure}
+import scala.util.Try
 
 /**
   * Sample API for the Godzilla Prediction System

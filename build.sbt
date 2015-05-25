@@ -1,11 +1,14 @@
 name    := "Godzilla Prediction System"
 version := "1.0-SNAPSHOT"
+
 licenses := Seq("Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0"))
+
 scalaVersion := "2.11.6"
 
 resolvers ++= Seq(
   "Spray Repository" at "http://repo.spray.io",
-  "Apache Staging" at "https://repository.apache.org/content/repositories/staging/"
+  "Apache Staging" at "https://repository.apache.org/content/repositories/staging/",
+  "Scalaz Bintray Repo" at "https://dl.bintray.com/scalaz/releases"
 )
 
 libraryDependencies ++= {
@@ -31,7 +34,9 @@ libraryDependencies ++= {
     "org.webjars"        %   "react-bootstrap"        % "0.19.1",
     // test
     "io.spray"           %%  "spray-testkit"          % sprayVersion % "test",
-    "org.specs2"         %%  "specs2"                 % "2.3.11"
+    "org.specs2"         %%  "specs2-core"            % "3.6" % "test",
+    "com.typesafe.akka"  %%  "akka-testkit"           % "2.4-M1" % "test"
+
   )
 }
 

@@ -2,11 +2,9 @@ package service
 
 import akka.actor.{Actor, ActorLogging}
 import api.Marshalling
-import spray.http.StatusCodes
 import spray.json.ProductFormats
 import core.SparkConfig._
 import scala.util.Try
-import scala.concurrent._
 
 case class LocationData(deviation: Int)
 case class Location(
@@ -40,7 +38,7 @@ trait SearchActions {
     Try {
       val dataFrame = sqlContext.sql(query)
 
-      dataFrame.map(row => new Location(
+      dataFrame.map(row => Location(
         row.getDouble(0),
         row.getDouble(1),
         row.getLong(2),
@@ -53,8 +51,5 @@ trait SearchActions {
 }
 
 trait MapFormats extends Marshalling with ProductFormats {
-
-  import spray.json._
-
   implicit val LocationFormat = jsonFormat6(Location)
 }

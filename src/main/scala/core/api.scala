@@ -1,12 +1,14 @@
 package core
 
 import java.util.concurrent.TimeUnit
-import akka.actor.{Props, ActorSystem}
+
+import akka.actor.Props
 import akka.util.Timeout
-import api.{ ErrorResponseException, Marshalling, GodzillaApi }
+import api.{ErrorResponseException, GodzillaApi, Marshalling}
 import spray.http.StatusCodes
 import spray.routing._
 import spray.util.LoggingContext
+
 import scala.util.control.NonFatal
 
 /**
