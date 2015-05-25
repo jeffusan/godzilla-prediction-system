@@ -13,7 +13,8 @@ object SparkConfig {
     .setMaster(config.getString("application.spark.master-uri"))
     .setAppName(config.getString("application.spark.app-name"))
 
-  val sqlContext = new SQLContext(new SparkContext(sc))
+  val sparkContext = new SparkContext(sc)
+  val sqlContext = new SQLContext(sparkContext)
 
   def init() = {
     // this loads the json data and creates a temporary table used for SQL later

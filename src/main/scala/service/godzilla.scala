@@ -25,7 +25,7 @@ trait SearchActions {
   def getLocationData(deviation: Int): Try[List[Location]] = {
     val query = s"""
     SELECT
-      T1.depth, temperature, T1.castNumber, T1.cruiseId, T1.latitude, T1.longitude
+      T1.depth, T1.temperature, T1.castNumber, T1.cruiseId, T1.latitude, T1.longitude
     FROM (
      SELECT depth, temperature, castNumber, cruiseId,
        latitude, longitude from godzilla) AS T1
@@ -35,6 +35,7 @@ trait SearchActions {
      ON T1.depth = T2.depth
      WHERE T1.temperature > T2.average + $deviation
     """
+    //val query = "SELECT depth, temperature, castNumber, cruiseId, latitude, longitude from godzilla limit 1"
     Try {
       val dataFrame = sqlContext.sql(query)
 

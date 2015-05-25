@@ -35,7 +35,7 @@ libraryDependencies ++= {
     // test
     "io.spray"           %%  "spray-testkit"          % sprayVersion % "test",
     "org.specs2"         %%  "specs2-core"            % "3.6" % "test",
-    "com.typesafe.akka"  %%  "akka-testkit"           % "2.4-M1" % "test"
+    "com.typesafe.akka"  %%  "akka-testkit"           % akkaVersion % "test"
 
   )
 }
@@ -47,3 +47,5 @@ Revolver.settings
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
 fork in run := true
+
+parallelExecution in Test := false
