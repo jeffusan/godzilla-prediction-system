@@ -25,22 +25,31 @@ class GodzillaServiceSpec extends Specification with SearchActions {
     )
     val df = sqlContext.jsonRDD(stringRDD)
     df.registerTempTable("godzilla")
-    println("count: " + df.count())
     val locations = getLocationData(1).asInstanceOf[Success[List[Location]]]
 
     locations.isSuccess must beTrue
     locations.get.size must_== 1
-    println("connect: " + locations); ok
+    println("location results: " + locations); ok
   }
 
-  "test again" >> {
+  "connects and retrieves a failure" >> {
+    val stringRDD = sparkContext.parallelize(Seq("""{"name" : "bad", "message": "news"}"""))
+    val df = sqlContext.jsonRDD(stringRDD)
+    df.registerTempTable("godzilla")
+    val locations = getLocationData(1);
+    locations.isFailure must beTrue
+    val failure = locations.asInstanceOf[Failure[List[Location]]]
+    println(failure)
     println("again"); ok
   }
 
 }
 
 
-
+/**
+  * silences Spark's rather verbose logging,
+  * stops the spark context after each test
+  */
 trait SparkTestContext extends AroundEach {
 
   def around[R: AsResult](r: => R): Result = {
@@ -50,7 +59,6 @@ trait SparkTestContext extends AroundEach {
   }
 
   private def destroyContext() {
-    println("DESTRYING")
     sparkContext.stop()
   }
 

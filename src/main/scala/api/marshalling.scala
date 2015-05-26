@@ -20,7 +20,9 @@ trait Marshalling extends DefaultJsonProtocol with SprayJsonSupport with MetaMar
 
   /**
     * Function for handling errors when API returns Left(ERROR) or Right(Response)
-    * For more information how eitherCustomMarshaller works
+    * This implementation was inspired by Darek's spray seed: https://github.com/darek/spray-slick-seed
+    *  who references http://www.cakesolutions.net/teamblogs/2012/12/10/errors-failures-im-a-teapot
+    *  as a good explanation.
     */
   implicit def eitherCustomMarshaller[A, B](code: StatusCode)(implicit ma: Marshaller[A], mb: Marshaller[B]): ToResponseMarshaller[Either[A, B]] = Marshaller[Either[A, B]] { (value, context) =>
     value match {

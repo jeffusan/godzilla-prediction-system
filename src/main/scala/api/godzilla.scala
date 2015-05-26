@@ -5,27 +5,21 @@ import akka.actor.ActorSystem
 import spray.routing.Directives
 import spray.httpx.TwirlSupport
 import spray.httpx.encoding.Gzip
-import service.{MapFormats, LocationData, Location}
+import service.{LocationFormats, LocationData, Location}
 import akka.pattern.ask
 import scala.util.Try
 
 /**
   * Sample API for the Godzilla Prediction System
-  * Each api path is in a separate spray 'path' directive for easier management
+  * Each api path is in a separate spray 'path' directive for easier management.
+  * LocationFormats provide implicit JSON marshalling,
+  * TwirlSupport provides twirl templates
+  * DefaultTimeout provide a base timeout
   */
-class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with DefaultTimeout with TwirlSupport with MapFormats {
+class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with DefaultTimeout with TwirlSupport with LocationFormats {
 
   import scala.concurrent.ExecutionContext.Implicits.global
   val godzillaActor = actorSystem.actorSelection("/user/gds/godzilla")
-
-  // references the assets directory for css, jsx, and application-specific javascript
-  val publicAssets = pathPrefix("assets") { fileName =>
-    get {
-      encodeResponse(Gzip) {
-        getFromResource("assets/" + fileName)
-      }
-    }
-  }
 
   // home page, retrieves compiled twirl template
   val index = path("") {
@@ -52,5 +46,5 @@ class GodzillaApi(implicit val actorSystem: ActorSystem) extends Directives with
     }
   }
 
-  val routes = publicAssets ~ index ~ locations ~ webjars ~ getFromResourceDirectory("assets")
+  val routes = index ~ locations ~ webjars ~ getFromResourceDirectory("assets")
 }

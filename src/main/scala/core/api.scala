@@ -44,7 +44,7 @@ trait DefaultTimeout {
 
 /**
   * Custom error handler
-  * Overriding receive makes this required.
+  * Overriding receive in applicationapiactor makes this required.
   * also see api.marshalling
   */
 trait CustomErrorHandler extends Marshalling {

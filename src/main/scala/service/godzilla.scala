@@ -10,6 +10,12 @@ case class LocationData(deviation: Int)
 case class Location(
     depth: Double, temperature: Double, cast: Long, cruise: String, latitude: Double, longitude: Double)
 
+/**
+  * Our Godzilla actor receives a message about locationdata -
+  * specifically it receives an int specifying the deviation from the average
+  * ocean temperature for a given depth. Based on that parameter,
+  * it retrieves potential Godzilla locations.
+  */
 class GodzillaActor extends Actor with SearchActions with ActorLogging {
 
   def receive: Receive = {
@@ -20,6 +26,11 @@ class GodzillaActor extends Actor with SearchActions with ActorLogging {
   }
 }
 
+/**
+  * SearchActions use a Try pattern to retrieve data from Spark and
+  * map the results to Location case classes.
+  * Try will contain either a Success or Failure class.
+  */
 trait SearchActions {
 
   def getLocationData(deviation: Int): Try[List[Location]] = {
@@ -35,7 +46,7 @@ trait SearchActions {
      ON T1.depth = T2.depth
      WHERE T1.temperature > T2.average + $deviation
     """
-    //val query = "SELECT depth, temperature, castNumber, cruiseId, latitude, longitude from godzilla limit 1"
+
     Try {
       val dataFrame = sqlContext.sql(query)
 
@@ -51,6 +62,6 @@ trait SearchActions {
   }
 }
 
-trait MapFormats extends Marshalling with ProductFormats {
+trait LocationFormats extends Marshalling with ProductFormats {
   implicit val LocationFormat = jsonFormat6(Location)
 }
