@@ -19,6 +19,13 @@ This project uses data from the [[http://www.nodc.noaa.gov/OC5/WOD/pr_wod.html][
 It reads a small subset of WOD data that has been downloaded and parsed separately (specifically,
 Moored Buoys (MRB) data from around Japan) and determines possible locations for ゴジラ (Godzilla), a potentially fictional ocean creature.
 
+** The User Interface
+
+[[file:tutorial/screenshot.png]]
+
+The Refinement toolbar buttons change the amount of deviation from the average temperature required to "get a hit".
+Low refinement results in more markers, high refinement only one. The default is medium.
+
 ** An entry point into the Application
 
 At a high level, when the application is started, for example, via Activator, a Spark instance is created in memory,

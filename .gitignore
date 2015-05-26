@@ -26,3 +26,5 @@ project/play-fork-run.sbt
 project/sbt-ui.sbt
 project/project/
 project/target/
+.DS_STORE
+/tutorial/.DS_STORE
