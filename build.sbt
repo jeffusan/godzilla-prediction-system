@@ -1,5 +1,5 @@
-name    := "Godzilla Prediction System"
-version := "1.0-SNAPSHOT"
+name    := "spray-spark-react"
+version := "4.0-SNAPSHOT"
 
 licenses := Seq("Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0"))
 
